@@ -1,0 +1,36 @@
+{
+  "name": "@hndx/emotion-elements",
+  "version": "0.1.0",
+  "author": {
+    "name": "Imraan-Hendricks",
+    "email": "support@imraanhendricks.com"
+  },
+  "description": "Emotion Elements is the ultimate React component library for front-end developers",
+  "private": false,
+  "license": "MIT",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Imraan-Hendricks/emotion-elements"
+  },
+  "scripts": {
+    "rollup": "rollup -c"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^24.1.0",
+    "@rollup/plugin-node-resolve": "^15.0.2",
+    "@rollup/plugin-typescript": "^11.1.0",
+    "@types/react": "^18.2.6",
+    "react": "^18.2.0",
+    "rollup": "^3.21.5",
+    "rollup-plugin-dts": "^5.3.0",
+    "rollup-plugin-postcss": "^4.0.2",
+    "tslib": "^2.5.0",
+    "typescript": "^5.0.4"
+  }
+}
