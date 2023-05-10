@@ -1,5 +1,6 @@
 import commonjs from '@rollup/plugin-commonjs';
 import dts from 'rollup-plugin-dts';
+import deletePlugin from 'rollup-plugin-delete';
 import postcss from 'rollup-plugin-postcss';
 import resolve from '@rollup/plugin-node-resolve';
 import typescript from '@rollup/plugin-typescript';
@@ -26,6 +27,7 @@ export default [
       commonjs(),
       typescript({ tsconfig: './tsconfig.json' }),
       postcss(),
+      deletePlugin({ targets: 'dist/*' }),
     ],
   },
   {
