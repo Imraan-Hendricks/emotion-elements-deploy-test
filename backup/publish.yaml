@@ -1,0 +1,66 @@
+#https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
+name: NPM Publishing Process
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  publish-npm:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Installing Dependencies
+        working-directory: ./
+        run: npm ci
+
+      - name: Performing Unit Testing
+        working-directory: ./
+        run: npm run test:jest-ci
+
+      - name: Creating Production Build
+        working-directory: ./
+        run: npm run build
+
+      - name: Creating .npmrc for NPM Registry
+        run: |
+          echo "//registry.npmjs.org/:_authToken=\${{ env.NODE_AUTH_TOKEN }}" > ${{ github.workspace }}/.npmrc
+          echo "registry=https://registry.npmjs.org/" >> ${{ github.workspace }}/.npmrc
+          echo "always-auth=true" >> ${{ github.workspace }}/.npmrc
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+
+      - name: Publish to NPM
+        run: npm publish --access public
+
+      - name: Cleaning .npmrc File
+        run: echo "" > ${{ github.workspace }}/.npmrc
+
+      - name: Creating .npmrc for GITHUB Registry
+        run: |
+          echo "/npm.pkg.github.com/:_authToken=\${{ env.NODE_AUTH_TOKEN }}" > ${{ github.workspace }}/.npmrc
+          echo "${{ env.SCOPE }}:registry=https://npm.pkg.github.com" >> ${{ github.workspace }}/.npmrc
+          echo "always-auth=true" >> ${{ github.workspace }}/.npmrc
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SCOPE: '@imraan-Hendricks'
+
+      - name: Publish to GITHUB
+        run: npm publish
