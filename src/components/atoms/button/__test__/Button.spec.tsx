@@ -10,6 +10,5 @@ describe('Button Component Tests', () => {
     render(<Button>Click Me</Button>);
     const buttonElement = screen.getByRole('button');
     expect(buttonElement).toHaveTextContent('Click Me');
-    expect(1).toBe(2);
   });
 });
