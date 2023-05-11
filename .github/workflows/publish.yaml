@@ -34,8 +34,8 @@ jobs:
         working-directory: ./
         run: npm run build
 
-      - name: Authenticate with NPM
-        run: echo "//@hndx:registry.npmjs.org/:_authToken=\${{ secrets.NPM_AUTH_TOKEN }}" > ~/.npmrc
-
       - name: Publish to NPM
-        run: npm publish --access public
+        run: |
+          echo "@hndx:registry=https://registry.npmjs.org/" > .npmrc
+          echo "//registry.npmjs.org/:_authToken=\${{ secrets.NPM_AUTH_TOKEN }}" >> .npmrc
+          npm publish --access public
