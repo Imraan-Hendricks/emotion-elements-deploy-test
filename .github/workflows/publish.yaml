@@ -27,7 +27,7 @@ jobs:
 
       - name: Performing Unit Testing
         working-directory: ./
-        run: npm run test:jest-ci
+        run: npm run test:jest-ci --updateSnapshot
 
       - name: Creating Production Build
         working-directory: ./
