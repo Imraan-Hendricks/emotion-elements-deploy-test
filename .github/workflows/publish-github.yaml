@@ -26,7 +26,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           registry-url: 'https://npm.pkg.github.com'
-          scope: '@hndx'
+          scope: '@imraan-hendricks'
 
       - name: Installing Dependencies
         working-directory: ./
