@@ -35,6 +35,11 @@ jobs:
         working-directory: ./
         run: npm run build
 
+      - name: Prepare Package.json
+        run: |
+          jq 'del(.name) | .name = "@hndx/emotion-elements"' package.json > tmp.json && mv tmp.json package.json
+          jq 'del(.publishConfig)' package.json > tmp.json && mv tmp.json package.json
+
       - name: Publish to NPM
         run: npm publish --access public
         env:

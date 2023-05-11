@@ -41,6 +41,8 @@ jobs:
         run: npm run build
 
       - name: Publish to GitHub Packages
-        run: npm publish --registry=https://npm.pkg.github.com --scope=@Imraan-Hendricks
+        run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
+# "name": "@imraan-hendricks/emotion-elements",
+# "publishConfig": { "registry": "https://npm.pkg.github.com/" },
