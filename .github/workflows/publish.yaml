@@ -18,9 +18,10 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Installing Dependencies
         working-directory: ./
@@ -35,7 +36,6 @@ jobs:
         run: npm run build
 
       - name: Publish to NPM
-        run: |
-          echo "@hndx:registry=https://registry.npmjs.org/" > .npmrc
-          echo "//registry.npmjs.org/:_authToken=\${{ secrets.NPM_AUTH_TOKEN }}" >> .npmrc
-          npm publish --access public
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
