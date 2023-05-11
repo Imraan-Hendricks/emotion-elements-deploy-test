@@ -44,5 +44,3 @@ jobs:
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
-# "name": "@imraan-hendricks/emotion-elements",
-# "publishConfig": { "registry": "https://npm.pkg.github.com/" },
