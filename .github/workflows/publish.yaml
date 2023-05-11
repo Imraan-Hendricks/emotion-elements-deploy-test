@@ -33,10 +33,10 @@ jobs:
         working-directory: ./
         run: npm run build
 
-      - name: Publish to GitHub Packages
-        run: npm publish --registry=https://npm.pkg.github.com/@imraan-hendricks
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #- name: Publish to GitHub Packages
+      #  run: npm publish --registry=https://npm.pkg.github.com/@imraan-hendricks
+      #  env:
+      #    NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish to NPM
         run: npm publish --access public
