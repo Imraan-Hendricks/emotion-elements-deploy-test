@@ -21,7 +21,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          #registry-url: 'https://registry.npmjs.org'
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Installing Dependencies
         working-directory: ./
@@ -39,6 +39,6 @@ jobs:
       #  run: npm publish --registry=https://npm.pkg.github.com/@imraan-hendricks
 
       - name: Publish to NPM
-        run: npm publish --registry=https://registry.npmjs.org
+        run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
