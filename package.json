@@ -1,5 +1,5 @@
 {
-  "name": "@hndx/emotion-elements",
+  "name": "@Imraan-Hendricks/emotion-elements",
   "version": "0.1.5",
   "author": {
     "name": "Imraan-Hendricks",
@@ -17,9 +17,6 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/Imraan-Hendricks/emotion-elements"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
   },
   "scripts": {
     "build": "rollup -c",
