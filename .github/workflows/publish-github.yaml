@@ -1,4 +1,4 @@
-name: Publishing Process
+name: GitHub Publishing Process
 
 on:
   push:
@@ -6,8 +6,12 @@ on:
       - main
 
 jobs:
-  publish-gpr:
+  publish-github:
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
 
     strategy:
       matrix:
@@ -21,7 +25,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          registry-url: 'https://registry.npmjs.org'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@hndx'
 
       - name: Installing Dependencies
         working-directory: ./
@@ -35,10 +40,7 @@ jobs:
         working-directory: ./
         run: npm run build
 
-      #- name: Publish to GitHub Packages
-      #  run: npm publish --registry=https://npm.pkg.github.com/@imraan-hendricks
-
-      - name: Publish to NPM
+        name: Publish to GitHub Packages
         run: npm publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
