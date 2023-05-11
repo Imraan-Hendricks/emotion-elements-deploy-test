@@ -21,8 +21,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          registry-url: 'https://registry.npmjs.org'
-          scope: '@hndx'
+          registry-url: 'https://registry.npmjs.org/@hndx'
 
       - name: Installing Dependencies
         working-directory: ./
