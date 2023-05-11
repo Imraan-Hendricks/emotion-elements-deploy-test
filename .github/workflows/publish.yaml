@@ -2,7 +2,8 @@ name: Publishing Process
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
   publish-gpr:
@@ -20,8 +21,6 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-          registry-url: 'https://registry.npmjs.org'
-          scope: '@hndx'
 
       - name: Installing Dependencies
         working-directory: ./
@@ -35,18 +34,7 @@ jobs:
         working-directory: ./
         run: npm run build
 
-      #- name: Publish to GitHub Packages
-      #  run: npm publish --registry=https://npm.pkg.github.com/@imraan-hendricks
-      #  env:
-      #    NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Publish to NPM
         run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-        #run: |
-        #  echo "@hndx:registry=https://registry.npmjs.org/" > .npmrc
-        #  echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_AUTH_TOKEN }}" >> .npmrc
-        #  npm publish --access public --tag latest
-        #run: npm publish --access public
-        #env:
-        #  NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
