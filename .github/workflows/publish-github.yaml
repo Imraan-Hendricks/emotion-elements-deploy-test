@@ -5,6 +5,10 @@ on:
     branches:
       - main
 
+env:
+  NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  SCOPE: '@Imraan-Hendricks'
+
 jobs:
   publish-github:
     runs-on: ubuntu-latest
@@ -26,7 +30,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           registry-url: 'https://npm.pkg.github.com'
-          scope: '@Imraan-Hendricks'
+          scope: '${{ env.SCOPE }}'
 
       - name: Installing Dependencies
         working-directory: ./
@@ -42,5 +46,3 @@ jobs:
 
       - name: Publish to GitHub Packages
         run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
