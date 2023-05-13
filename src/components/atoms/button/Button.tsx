@@ -14,7 +14,7 @@ function Button({
       style={{
         padding: '1rem 2.5rem',
         borderRadius: '0.375rem',
-        fontWeight: 500,
+        fontWeight: 600,
         backgroundColor: color === 'primary' ? '#2563eb' : '#a855f7',
       }}
       {...rest}>
